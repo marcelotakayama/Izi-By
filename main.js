@@ -11,6 +11,25 @@ const db = mongoose.connection;
 db.on("Error", (error) => console.log(error));
 db.once("open", () => console.log("Conectado no banco de dados"));
 
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
+app.use(
+    session({
+        secret: "My secret key",
+        saveUninitialized: true,
+        resave: false,
+    })
+);
+
+app.use((req, res, next) => {
+    res.locals.message = req.session.message;
+    delete req.session.message;
+    next();
+})
+
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
     res.send("SALVE");
 });
