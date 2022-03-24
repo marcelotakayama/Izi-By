@@ -21,8 +21,19 @@ mysqlConnection.connect((err) => {
 
 app.listen(3000, ()=>console.log("Servidor rodando na porta 3000"));
 
+// Lista todos os itens do banco
 app.get('/itens', (req, res)=>{
     mysqlConnection.query("SELECT * FROM items", (err, rows, fields)=>{
+        if(!err)
+            console.log(rows);
+        else
+            console.log(err);
+    })
+})
+
+// Lista um único item do banco
+app.get('/itens/:id', (req, res)=>{
+    mysqlConnection.query("SELECT * FROM items WHERE iditems = ?", [req.params.id], (err, rows, fields)=>{
         if(!err)
             console.log(rows);
         else
