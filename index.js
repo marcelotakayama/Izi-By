@@ -40,3 +40,13 @@ app.get('/itens/:id', (req, res)=>{
             console.log(err);
     })
 })
+
+// Apaga um único item do banco
+app.delete('/itens/:id', (req, res)=>{
+    mysqlConnection.query("DELETE FROM items WHERE iditems = ?", [req.params.id], (err, rows, fields)=>{
+        if(!err)
+            console.log("item apagado");
+        else
+            console.log(err);
+    })
+})
