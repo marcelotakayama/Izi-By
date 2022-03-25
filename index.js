@@ -9,7 +9,8 @@ var mysqlConnection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "password",
-    database: "itemdb"
+    database: "itemdb",
+    multipleStatements: true
 });
 
 mysqlConnection.connect((err) => {
@@ -50,3 +51,19 @@ app.delete('/itens/:id', (req, res)=>{
             console.log(err);
     })
 })
+
+// // Apaga um único item do banco
+// app.post('/itens', (req, res)=>{
+//     let x = req.body;
+//     var sql =  "SET @iditems = ?;SET @Nome = ?; SET @Quantidade = ?; \
+//     CALL ItemAddOrEdit(@iditems,@Nome,@Quantidade);";
+//     mysqlConnection.query(sql, [x.iditems, x.Nome, x.Quantidade], (err, rows, fields)=>{
+//         if(!err)
+//             rows.forEach(element => {
+//                 if(element.constructor == Array)
+//                 res.send("ID do Item adicionado: "+element[0].iditems);
+//             });
+//         else
+//             console.log(err);
+//     })
+// })
