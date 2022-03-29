@@ -21,7 +21,7 @@ Item.create = function (newItem, result) {
 };
 
 Item.findById = function (id, result) {
-    mysqlConnection.query("Select * from items where iditems = ? ", id, function (err, res) {
+    mysqlConnection.query("SELECT * from items where iditems = ? ", id, function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -33,7 +33,7 @@ Item.findById = function (id, result) {
 };
 
 Item.findAll = function (result) {
-    mysqlConnection.query("Select * from items", function (err, res) {
+    mysqlConnection.query("SELECT * from items", function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);
