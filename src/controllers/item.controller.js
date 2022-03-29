@@ -12,16 +12,15 @@ exports.findAll = function(req, res) {
 };
 
 exports.create = function(req, res) {
-const new_item = new Item(req.body);
-    //handles null error
+    const new_item = new Item(req.body);
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-          res.status(400).send({ error:true, message: 'Please provide all required field' });
+          res.status(400).send({ error:true, message: 'É necessário passar todos os campos obrigatórios' });
     }
     else{
         Item.create(new_item, function(err, item) {
             if (err)
             res.send(err);
-            res.json({error:false,message:"item added successfully!",data:item});
+            res.json({error:false,message:"item adicionado com sucesso",data:item});
         });
     }
 };
@@ -35,13 +34,13 @@ exports.findById = function(req, res) {
 };
 exports.update = function(req, res) {
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-        res.status(400).send({ error:true, message: 'Please provide all required field' });
+        res.status(400).send({ error:true, message: 'Estão faltando campos obrigatórios' });
     }
     else{
         Item.update(req.params.id, new Item(req.body), function(err, item) {
     if (err)
         res.send(err);
-        res.json({ error:false, message: 'item successfully updated' });
+        res.json({ error:false, message: 'item atualizado com sucesso' });
     });
     }
 };
@@ -50,6 +49,6 @@ exports.delete = function(req, res) {
     Item.delete( req.params.id, function(err, item) {
     if (err)
         res.send(err);
-        res.json({ error:false, message: 'item successfully deleted' });
+        res.json({ error:false, message: 'item apagado com sucesso' });
     });
 };

@@ -2,19 +2,19 @@ const express = require('express')
 const router = express.Router()
 const itemController =   require('../controllers/item.controller');
 
-// Retrieve all employees
+// Retorna todos os itens
 router.get('/', itemController.findAll);
 
-// Create a new employee
-router.post('/', itemController.create);
-
-// Retrieve a single employee with id
+// Retorna um item específico
 router.get('/:id', itemController.findById);
 
-// Update a employee with id
+// Cria um novo item
+router.post('/', itemController.create);
+
+// Atualiza um item específico
 router.put('/:id', itemController.update);
 
-// Delete a employee with id
+// Apaga um item específico
 router.delete('/:id', itemController.delete);
 
 module.exports = router
