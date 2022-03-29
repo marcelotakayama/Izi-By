@@ -32,6 +32,7 @@ exports.findById = function(req, res) {
         res.json(item);
     });
 };
+
 exports.update = function(req, res) {
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
         res.status(400).send({ error:true, message: 'Estão faltando campos obrigatórios' });
