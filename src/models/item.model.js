@@ -20,6 +20,19 @@ Item.create = function (newItem, result) {
     });
 };
 
+Item.findAll = function (result) {
+    mysqlConnection.query("SELECT * from items", function (err, res) {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else{
+            result(null, res);
+        }
+    });
+};
+
+
 Item.findById = function (id, result) {
     mysqlConnection.query("SELECT * from items where iditems = ? ", id, function (err, res) {
         if(err) {
@@ -32,18 +45,6 @@ Item.findById = function (id, result) {
     });
 };
 
-Item.findAll = function (result) {
-    mysqlConnection.query("SELECT * from items", function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else{
-            console.log('items : ', res);
-            result(null, res);
-        }
-    });
-};
 
 Item.update = function(iditems, item, result){
     mysqlConnection.query("UPDATE items SET Nome=?,Quantidade=? WHERE iditems = ?", [item.Nome,item.Quantidade, iditems], function (err, res) {

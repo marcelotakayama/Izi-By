@@ -19,17 +19,17 @@ exports.create = function(req, res) {
     else{
         Item.create(new_item, function(err, item) {
             if (err)
-            res.send(err);
-            res.json({error:false,message:"item adicionado com sucesso",data:item});
+                res.send(err);
+                res.json({error:false,message:"item adicionado com sucesso",data:item});
         });
     }
 };
 
 exports.findById = function(req, res) {
     Item.findById(req.params.id, function(err, item) {
-      if (err)
-        res.send(err);
-        res.json(item);
+        if (err)
+            res.send(err);
+            res.json(item);
     });
 };
 
@@ -39,10 +39,10 @@ exports.update = function(req, res) {
     }
     else{
         Item.update(req.params.id, new Item(req.body), function(err, item) {
-    if (err)
-        res.send(err);
-        res.json({ error:false, message: 'item atualizado com sucesso' });
-    });
+        if (err)
+            res.send(err);
+            res.json({ error:false, message: 'item atualizado com sucesso' });
+        });
     }
 };
 
